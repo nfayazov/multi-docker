@@ -15,14 +15,14 @@ after_success:
   - docker build -t nfayazov/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  
+
   # Push these images to docker hub
   - docker push nfayazov/multi-client
   - docker push nfayazov/multi-nginx
   - docker push nfayazov/multi-server
   - docker push nfayazov/multi-worker
  
- deploy:
+deploy:
   provide: elasticbeanstalk
   region: us-west-1
   app: multi-docker
@@ -33,4 +33,4 @@ after_success:
     branch: master
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key:
-    secure: $AWS_SECRET_KEY
+  secure: $AWS_SECRET_KEY
